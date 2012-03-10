@@ -1,0 +1,31 @@
+---
+:disk: Archive
+:destination: /Volumes/Archive/ody/sites/mirrors
+:source: mirrors.herriges.lan
+:mtype:
+  :apt:
+    :staging: /Volumes/Archive/ody/apt-mirror
+    :syncer:
+      :apt-mirror:
+        :mirrors:
+          :"debian-backports":
+            :releases:
+              - squeeze-backports
+          :debian:
+            :releases:
+              - squeeze
+              - squeeze-updates
+              - wheezy
+  :rpm:
+    :staging: /Volumes/Archive/ody/rsync-mirror
+    :syncer:
+      :rsync:
+        :mirrors:
+          :centos:
+            :releases:
+              - 5
+              - 6
+          :fedora-epel:
+            :releases:
+              - 5
+              - 6

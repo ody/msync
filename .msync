@@ -1,10 +1,10 @@
 ---
 :disk: Archive
-:destination: /Volumes/Archive/ody/sites/mirrors
-:source: mirrors.herriges.lan
+:destination: /Volumes/Archive/user/Sites/mirrors
+:source: mirrors.cat.pdx.edu
 :mtype:
   :apt:
-    :staging: /Volumes/Archive/ody/apt-mirror
+    :staging: /Volumes/Archive/user/apt-mirror
     :syncer:
       :apt-mirror:
         :mirrors:
@@ -17,7 +17,7 @@
               - squeeze-updates
               - wheezy
   :rpm:
-    :staging: /Volumes/Archive/ody/rsync-mirror
+    :staging: /Volumes/Archive/user/rsync-mirror
     :syncer:
       :rsync:
         :mirrors:

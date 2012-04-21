@@ -22,6 +22,16 @@ class Msync
     end
   end
 
+  def do_rsyncs_special
+    disk_mount
+    rsync_include_config
+  end
+
+  def rsync_include_config
+    contents = %x['rsync' "rsync://#{@config[:source]}/#{m[0]}"]
+    files = contents.each_line.reject do |line| line.match(/^l|^d/) end
+  end
+
   def do_apts
     disk_mount
     apt_mirror_config
@@ -38,9 +48,9 @@ class Msync
 
     @config[:mtype][:apt][:syncer][:"apt-mirror"][:mirrors].each do |m|
       m[1][:releases].each do |r|
-        template << "deb http://#{@config[:source]}/#{m[0]} #{r} main contrib non-free" << "\n" +
-                    "deb-amd64 http://#{@config[:source]}/#{m[0]} #{r} main contrib non-free" << "\n"  +
-                    "deb-src http://#{@config[:source]}/#{m[0]} #{r} main contrib non-free" << "\n\n"
+        template << "deb http://#{@config[:source]}/#{m[0]} #{r[0]} #{r[1][:components].join(' ')}" << "\n" +
+                    "deb-amd64 http://#{@config[:source]}/#{m[0]} #{r[0]} #{r[1][:components].join(' ')}" << "\n"  +
+                    "deb-src http://#{@config[:source]}/#{m[0]} #{r[0]} #{r[1][:components].join(' ')}" << "\n\n"
       end
       template << "clean http://#{@config[:source]}/#{m[0]}\n\n"
     end
